@@ -1,6 +1,6 @@
 # PyStok 
 
-Materials used during my [PyStok]() talks.
+Materials used during my [PyStok](https://pystok.org) talks.
 
 ## PyStok #70
 
