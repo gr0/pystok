@@ -2,7 +2,7 @@
 # Tekst
 #########
 
-bin/solr start -c -f
+bin/solr start -c -f -Dsolr.modules=extraction
 
 curl -XPOST 'http://localhost:8983/solr/admin/collections?action=CREATE&name=tekst&numShards=1&replicationFactor=1'
 
@@ -33,8 +33,6 @@ bin/solr start -c -f -Dsolr.modules=extraction
 
 curl -XPOST 'http://localhost:8983/solr/admin/collections?action=CREATE&name=ocr&numShards=1&replicationFactor=1'
 
-curl -XPOST 'http://localhost:8983/solr/ocr/config' -d '{"set-user-property": {"update.autoCreateFields":"false"}}'
-
 curl -XPOST -H 'Content-type:application/json' 'http://localhost:8983/solr/ocr/config' -d '{
   "add-requesthandler": {
     "name": "/update/extract",
@@ -59,8 +57,6 @@ http://localhost:8983/solr/ocr/select?q=content:Andersen AND content:brzydkie&fq
 ##############
 
 curl -XPOST 'http://localhost:8983/solr/admin/collections?action=CREATE&name=embeddings&numShards=1'
-
-curl -XPOST 'http://localhost:8983/solr/embeddings/config' -d '{"set-user-property": {"update.autoCreateFields":"false"}}'
 
 curl -XPOST -H 'Content-type:application/json' 'http://localhost:8983/solr/embeddings/schema' --data-binary '{
   "add-field-type" : {
